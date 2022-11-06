@@ -19,7 +19,7 @@
 	</properties>
 <distributionManagement>
 <url>http://192.168.1.16:8081/#browse/browse:maven-releases/</url>
-<distributionManagement>
+</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
