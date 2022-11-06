@@ -18,7 +18,7 @@
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
 	</properties>
 <distributionManagement>
-<url>http://192.168.1.16:8081/repository/maven-releases/</url>
+<url>http://192.168.1.16:8081/#browse/browse:maven-releases/</url>
 <distributionManagement>
 	<dependencies>
 		<dependency>
