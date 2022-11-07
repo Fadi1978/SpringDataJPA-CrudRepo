@@ -1,48 +1,94 @@
 package tn.esprit.rh.achat;
-import lombok.extern.slf4j.Slf4j;
-import tn.esprit.rh.achat.entities.Produit;
-import tn.esprit.rh.achat.repositories.ProduitRepository;
-import tn.esprit.rh.achat.services.ProduitServiceImpl;
 
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import lombok.extern.slf4j.Slf4j;
+import tn.esprit.rh.achat.AchatApplication;
+import tn.esprit.rh.achat.entities.SecteurActivite;
+import tn.esprit.rh.achat.services.ISecteurActiviteService;
 
 @Slf4j
-@SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest(classes = AchatApplication.class)
+@RunWith(SpringRunner.class)
 public class ProduitServiceImplTest {
-@Mock
-ProduitRepository produitRepository;
-@InjectMocks
-ProduitServiceImpl produitService;
-Produit p1=new Produit(12L,"123","prod1",(float)1200,null,null,null,null,null);
-List<Produit> listProduits=new ArrayList<Produit>(){
-	{
-	add(new Produit(13L,"123","prod2",(float)1200,null,null,null,null,null));
-	add(new Produit(14L,"123","prod3",(float)1200,null,null,null,null,null));
-	}
 	
-};
-@Test
-@Order(1)
-public void testRetrieveProduit() {
-   System.out.println("Mock1 TestRetrieveProduit");
-    Mockito.when(produitRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(p1));
-    Produit produit1 = produitService.retrieveProduit(Long.valueOf("1"));
-    Assertions.assertNotNull(produit1);
-}
+	 @Autowired
+	    ISecteurActiviteService sas;
+	    @Test
+	    @Order(2)
+	    public void testretrieveAllSecteurs(){
+	       int listSecteur = sas.retrieveAllSecteurActivite().size();
+	        List<SecteurActivite> listSecteurs = sas.retrieveAllSecteurActivite();
+	        Assertions.assertEquals(listSecteur,listSecteurs.size());
+	    }
+
+	    @Test
+	    @Order(3)
+	     public void testretrieveSecteurActivite(){
+	    	SecteurActivite sa = sas.addSecteurActivite(SecteurActivite.builder()
+	               .codeSecteurActivite("code1secteur")
+	               .libelleSecteurActivite("sect1")
+	               .build());
+	        Assertions.assertEquals(sa.getIdSecteurActivite(), sas.retrieveSecteurActivite(sa.getIdSecteurActivite()).getIdSecteurActivite()) ;
+			System.out.println("retrieve junit !");
+
+	    }
+
+	    @Test
+	    @Order(1)
+	    public void testaddSecteurActivite(){
+	    	SecteurActivite sa = sas.addSecteurActivite(SecteurActivite.builder()
+		               .codeSecteurActivite("code12secteur")
+		               .libelleSecteurActivite("sect12")
+		               .build());
+	        Assertions.assertNotNull(sa);
+			System.out.println("add junit !");
+
+
+
+	    }
+
+	    @Test
+	    @Order(5)
+	    public void testdeleteSecteur(){
+	    	SecteurActivite sa = sas.addSecteurActivite(SecteurActivite.builder()
+		               .codeSecteurActivite("code122secteur")
+		               .libelleSecteurActivite("sect122")
+		               .build());
+	        sas.deleteSecteurActivite(sa.getIdSecteurActivite());
+	        //Assertions.assertEquals(- 1,os.retrieveAllOperateurs().size());
+	        Assertions.assertNull(sas.retrieveSecteurActivite(sa.getIdSecteurActivite()));
+			System.out.println("delete junit !");
+
+
+	    }
+
+	    @Test
+	    @Order(4)
+	    public void tesupdateSecteur(){
+	    	SecteurActivite sa = sas.addSecteurActivite(SecteurActivite.builder()
+		               .codeSecteurActivite("code123secteur")
+		               .libelleSecteurActivite("sect123")
+		               .build());
+	        sa.setCodeSecteurActivite("test");
+	        sas.updateSecteurActivite(sa);
+	        Assertions.assertEquals("test", sas.updateSecteurActivite(sa).getCodeSecteurActivite());
+			System.out.println("update junit !");
+
+
+	    }
+
+
 
 }
