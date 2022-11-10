@@ -26,7 +26,7 @@ import tn.esprit.rh.achat.services.FournisseurServiceImpl;
 @SpringBootTest(classes = AchatApplication.class)
 @ExtendWith(MockitoExtension.class)
 @RunWith(MockitoJUnitRunner.class)
-public class FournisseurServiceMockito {
+public class FournisseurServiceMockitoTest {
 	 @Mock
 	 FournisseurRepository produitRepositoryMock;
 	 @InjectMocks
