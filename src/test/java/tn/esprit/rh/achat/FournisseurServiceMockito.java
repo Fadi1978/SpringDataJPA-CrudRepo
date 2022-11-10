@@ -81,7 +81,7 @@ public class FournisseurServiceMockito {
 
 	}
 
-	@Test
+	/*@Test
 	public void testupdateFournisseur() {
 		op.setLibelle("khalil");
 	     Mockito.when(produitRepositoryMock.save(op)).thenReturn(op);
@@ -89,5 +89,5 @@ public class FournisseurServiceMockito {
 	     Assertions.assertEquals(op.getLibelle(),op1.getLibelle());
 			System.out.println("woooorkiiiiing update !");
 
-	}
+	}*/
 }
