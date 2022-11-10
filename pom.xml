@@ -24,7 +24,7 @@
 		<sonar.jacoco.reportsPaths>${project.build.directory}/jacoco-ut.exec</sonar.jacoco.reportsPaths>
 		<sonar.tests>src/test/java</sonar.tests>
 		<sonar.projectKey>sonar-test</sonar.projectKey>
-		<sonar.host.url>http://192.168.1.16:9000</sonar.host.url>
+		<sonar.host.url>http://192.168.43.200:9000</sonar.host.url>
 
 	</properties>
 	<dependencies>
@@ -175,3 +175,4 @@
 	</build>
 
 </project>
+	
