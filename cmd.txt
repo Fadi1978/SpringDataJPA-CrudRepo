@@ -1,0 +1,6 @@
+les commandes  : 
+
+(lancer jenkins) : sudo systemctl start jenkins.services
+(lancer sonar ) : docker run -p 9000:9000 sonarqube:8.9.7-community
+(lancer docker ) : docker start id
+(lancr nexus ) : docker run -d -p 8081:8081 --name nexus sonatype/nexus3
